@@ -8,13 +8,9 @@ int main()
 	obj.MakeArrayFromFile();
 
 	obj.PrintMatrix();
+		
 
-
-
-
-
-
-
+	obj.Permutate(10);	
 
 
 
