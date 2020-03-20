@@ -56,12 +56,18 @@ void AdjacencyMatrix::PrintMatrix()
 
 void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 {
-	int numElements = 10;
+
+	numElements = NUMELEMENTS;
 	int permsThisCall = 1;
 
-	for(int i=0;i<10;i++)
+	for(int i=0;i<NUMELEMENTS;i++)
 	{
-		permsThisCall = permsThisCall * (10-i);
+		permsThisCall = permsThisCall * (NUMELEMENTS-i);
+	}
+
+	for(int i=0;i<=numElements;i++)
+	{
+		permVect.push_back(i+1);
 	}
 
 	int m, k, p, q, i;
@@ -70,21 +76,21 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 	for(i = 1;i < permsThisCall; i++)
 	{
 		m = NUMELEMENTS-2;
-		while(permMatrix[m]>permMatrix[m+1])
+		while(permVect.at(m)>permVect.at(m+1))
 		{
 			m = m - 1;            
 		}
 		k = NUMELEMENTS - 1;
-		while(permMatrix[m] > permMatrix[k])
+		while(permVect.at(m) > permVect.at(k))
 		{
 			k = k - 1;
 		}
-		std::swap(permMatrix[m],permMatrix[k]);
+		std::swap(permVect.at(m),permVect.at(k));
 		p = m + 1;
 		q = NUMELEMENTS-1;
 		while(p < q)
 		{
-			std::swap(permMatrix[p],permMatrix[q]);
+			std::swap(permVect.at(p),permVect.at(q));
 			p++;
 			q--;
 		}
@@ -97,9 +103,9 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 void AdjacencyMatrix::printS()
 {
 
-	for(int i=0;i<10;i++)
+	for(int i=0;i<numElements;i++)
 	{
-		std::cout << permMatrix[i] << " ";
+		std::cout << permVect.at(i) << " ";
 	}
 	std::cout << std::endl;
 

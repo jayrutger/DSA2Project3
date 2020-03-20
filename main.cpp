@@ -7,10 +7,9 @@ int main()
 
 	obj.MakeArrayFromFile();
 
-	obj.PrintMatrix();
+//	obj.PrintMatrix();
 		
-
-	obj.Permutate(10);	
+	obj.Permutate(12);	
 
 
 
