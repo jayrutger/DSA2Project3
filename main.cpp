@@ -7,11 +7,11 @@ int main()
 
 	obj.MakeArrayFromFile();
 
-//	obj.PrintMatrix();
+	obj.PrintMatrix();
 		
-	obj.Permutate(12);	
+	obj.Permutate(3);	
 
-
+	obj.GetDistance();
 
 	return 0;
 }
