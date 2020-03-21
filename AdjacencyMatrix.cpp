@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+using namespace std::chrono;
+
 void AdjacencyMatrix::MakeArrayFromFile()
 {
 	std::string line;
@@ -62,10 +64,15 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 	numElements = NUMELEMENTS;
 	int permsThisCall = 1;
 
+	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
+
+
 	for(int i=0;i<NUMELEMENTS;i++)
 	{
 		permsThisCall = permsThisCall * (NUMELEMENTS-i);
 	}
+
+//	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	numPermutations = permsThisCall;
 	for(int i=0;i<=numElements;i++)
 	{
@@ -77,6 +84,7 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 	
 	permVect2.push_back(permVect);//To store normal int vector
 	
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	for(i = 1;i < permsThisCall; i++)
 	{
 		m = NUMELEMENTS-2;
@@ -104,28 +112,33 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 //		printS();
 	}
 
-		printS();	
+//		printS();	
+
+		high_resolution_clock::time_point t2 = high_resolution_clock::now();
+
+
+		duration<double> time_span = duration_cast<duration<double>>(t2-t1);
+
+		GetDistance();
+
+		std::cout << "It took : " << time_span.count() << " seconds" << std::endl;
 
 }
 
 void AdjacencyMatrix::printS()
 {
-//	permVect2.push_back(permVect);
 
 	for(int i=0;i<numPermutations;i++)
 	{
 		for(int j=0;j<numElements;j++)
 		{
-			//std::cout << permVect.at(i) << " ";
 			std::cout << permVect2[i].at(j) << " ";
 	
 		}
 
-	std::cout << std::endl;
+		std::cout << std::endl;
 	}
-	//std::cout << numPermutations;
 	std::cout << std::endl;
-	//std::cout << permVect2.size();
 
 
 }
@@ -133,7 +146,6 @@ void AdjacencyMatrix::printS()
 double AdjacencyMatrix::GetDistance()
 {	
 	double minValue=0;
-	//std::cout << permVect2.size() << std::endl;
 	for(int i=0;i<permVect2.size();i++)
 	{
 		double thisTotal = 0;
@@ -143,33 +155,34 @@ double AdjacencyMatrix::GetDistance()
 
 			if(j==numElements-1)
 			{
-				//thisTotal += matrix[permVect2[i].at(j)-1][permVect2[i].at(0)-1];	
-
-				std::cout <<  matrix[permVect2[i].at(j)-1][permVect2[i].at(0)-1] << std::endl << "last\n";	
-			}
-			else
-			{
-				//thisTotal+=  matrix[permVect2[i].at(j)-1][permVect2[i].at(j)];
+				thisTotal += matrix[permVect2[i].at(j)-1][permVect2[i].at(0)-1];	
 		
-				std::cout << matrix[permVect2[i].at(j)-1][permVect2[i].at(j+1) - 1] << std::endl;
+				//std::cout <<  matrix[permVect2[i].at(j)-1][permVect2[i].at(0)-1] << std::endl;	
+			}
+
+			else
+			{	
+				thisTotal += matrix[permVect2[i].at(j)-1][permVect2[i].at(j+1) - 1];
+	
+				//std::cout << matrix[permVect2[i].at(j)-1][permVect2[i].at(j+1) - 1] << std::endl;
 			}
 		}
 
-//		if(i == 0)
-	//	{
-	//		minValue = thisTotal;
-//		}
+		if(i == 0)
+		{
+			minValue = thisTotal;
+		}
 
-		//if(thisTotal < minValue)
-		//{
-		//	minValue = thisTotal;
-		//}
-	//	std::cout << thisTotal;
+		if(thisTotal < minValue)
+		{
+			minValue = thisTotal;
+		}
+//		std::cout << thisTotal;
 	}
 
-//std::cout << minValue; WORKS ME THINKS
-
-
-
+	std::cout << "The minimum distance is: " << minValue << std::endl;// WORKS ME THINKS
 
 }
+
+
+
