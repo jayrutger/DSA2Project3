@@ -60,19 +60,15 @@ void AdjacencyMatrix::PrintMatrix()
 
 void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 {
-
+	double minValue = 0;
 	numElements = NUMELEMENTS;
 	int permsThisCall = 1;
-
-	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
-
 
 	for(int i=0;i<NUMELEMENTS;i++)
 	{
 		permsThisCall = permsThisCall * (NUMELEMENTS-i);
 	}
 
-//	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	numPermutations = permsThisCall;
 	for(int i=0;i<=numElements;i++)
 	{
@@ -82,11 +78,34 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 	int m, k, p, q, i;
 //	printS();//set called S
 	
-	permVect2.push_back(permVect);//To store normal int vector
-	
+///	permVect2.push_back(permVect);//To store normal int vector
+
+//	thisTotal += matrix[permVect.at(j)-1][permVect2.at(0)-1];	
+
+	double firstTotal=0;
+
+	for(int j=0;j<numElements;j++)
+	{
+
+		if(j==numElements-1)
+		{
+			firstTotal += matrix[permVect.at(j)-1][permVect.at(0)-1];		
+		}
+
+		else
+		{	
+			firstTotal += matrix[permVect.at(j)-1][permVect.at(j+1) - 1];
+		}
+	}
+			minValue = firstTotal;
+
+
 	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	
 	for(i = 1;i < permsThisCall; i++)
 	{
+		double thisTotal = 0;
+
 		m = NUMELEMENTS-2;
 		while(permVect.at(m)>permVect.at(m+1))
 		{
@@ -107,7 +126,28 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 			q--;
 		}
 
-		permVect2.push_back(permVect);
+///		permVect2.push_back(permVect);//Permutated vectors
+
+		for(int j=0;j<numElements;j++)
+		{
+
+			if(j==numElements-1)
+			{
+				thisTotal += matrix[permVect.at(j)-1][permVect.at(0)-1];		
+			}
+
+			else
+			{	
+				thisTotal += matrix[permVect.at(j)-1][permVect.at(j+1) - 1];	
+			}
+		}
+
+
+		if(thisTotal < minValue)
+		{
+			minValue = thisTotal;
+		}
+
 
 //		printS();
 	}
@@ -119,8 +159,10 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 
 		duration<double> time_span = duration_cast<duration<double>>(t2-t1);
 
-		GetDistance();
+//		GetDistance();
 
+		std::cout << "The minimum distance is: " << minValue << std::endl;// WORKS ME THINKS
+		
 		std::cout << "It took : " << time_span.count() << " seconds" << std::endl;
 
 }

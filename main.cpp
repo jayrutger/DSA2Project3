@@ -6,7 +6,7 @@ int numCities, numTours, numGenerations, numPercent;
 
 int main()
 {
-
+/*
 	do{
 		valid = true;
 		std::cout << "Please enter number of cities to run: " << std::endl;
@@ -84,7 +84,7 @@ int main()
 
 	}while(valid==false);
 
-
+*/
 	
 
 	AdjacencyMatrix obj;
@@ -93,7 +93,7 @@ int main()
 
 //	obj.PrintMatrix();
 		
-	obj.Permutate(11);	
+	obj.Permutate(12);	
 
 //	obj.GetDistance();
 	
