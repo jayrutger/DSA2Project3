@@ -12,7 +12,8 @@ class AdjacencyMatrix
 {
 
 	private:
-	
+		double bruteForce;
+		double genForce;	
 		int numElements;
 		int numPermutations;
 		double matrix[20][20];

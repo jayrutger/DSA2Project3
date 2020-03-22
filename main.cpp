@@ -85,22 +85,22 @@ int main()
 	}while(valid==false);
 
 
-	
+	std::cout << std::endl;
 
 	AdjacencyMatrix obj;
 
 	obj.MakeArrayFromFile();
 
 //	obj.PrintMatrix();
-	
 
-	std::cout << "The number of cities ran is: " << numCities << std::endl;
 
-	obj.Permutate(10);	
+	std::cout << "The number of cities ran is: " << numCities << std::endl<< std::endl;
+
+	obj.Permutate(numCities);	
 
 //	obj.GetDistance();	
 
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
 
 	obj.Generational(numCities, numTours, numGenerations, numPercent);
 

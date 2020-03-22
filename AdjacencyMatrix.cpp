@@ -154,9 +154,11 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 
 		duration<double> time_span = duration_cast<duration<double>>(t2-t1);
 
+		this->bruteForce = minValue;
+	
 		std::cout << "The optimal cost of brute force is: " << minValue << std::endl;// WORKS ME THINKS
 		
-		std::cout << "It took : " << time_span.count() << " seconds" << std::endl  <<std::endl;
+		std::cout << "It took: " << time_span.count() << " seconds"  <<std::endl;
 
 }
 
@@ -231,6 +233,7 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 		genPermVect.push_back(i+1);
 	}
 
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
 	for(int i=0; i<numGenerations; i++)
 	{
 
@@ -249,7 +252,7 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 			generationVect.push_back(eliteTracker.at(1));
 		}
 
-		std::srand ( unsigned (std::time(0)));
+		std::srand (unsigned (std::time(0)));
 		for (int i=0; i<numTours; i++)
 		{
 			double thisTotal=0;
@@ -292,37 +295,39 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 		
 		}
 	
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
+//		std::cout << std::endl;
+//		std::cout << std::endl;
+//		std::cout << std::endl;
 
 	for(int j=0;j<eliteTracker.size();j++)
 	{
 
 		for(int i=0;i<numCities;i++)
 		{
-			std::cout << eliteTracker[j].at(i) << " ";
+//			std::cout << eliteTracker[j].at(i) << " ";
 		}
-		std::cout << std::endl;
+//		std::cout << std::endl;
 	}
 
 
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
+//		std::cout << std::endl;
+//		std::cout << std::endl;
+//		std::cout << std::endl;
+		if(numGen == numGenerations-1)
+		{	
+			std::cout <<"The min distance of this generation is: " <<  genMin << std::endl; 
 
-		std::cout <<"The min distance of this generation is: " <<  genMin << std::endl; 
+		}
 
-
-		std::cout << "The elites of this generation are: ";
+//		std::cout << "The elites of this generation are: ";
 
 		for(int i=0;i<numCities;i++)
 		{
-			std::cout << eliteTracker[eliteTracker.size()-1].at(i) << " ";
+//			std::cout << eliteTracker[eliteTracker.size()-1].at(i) << " ";
 		}
-		std::cout << std::endl;
+//		std::cout << std::endl;
 
-		std::cout << "With a distance of: ";
+//		std::cout << "With a distance of: ";
 
 		double totalOne = 0;
 			for(int j=0;j<numCities;j++)//Prints out shuffled vector
@@ -343,20 +348,20 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 			}
 
 
-		std::cout << totalOne;
+//		std::cout << totalOne;
 		
-		std::cout << std::endl;
-		std::cout << "and: ";
+//		std::cout << std::endl;
+//		std::cout << "and: ";
 
 		double totalTwo=0;
 
 		for(int i=0;i<numCities;i++)
 		{
-			std::cout << eliteTracker[eliteTracker.size()-2].at(i) << " ";
+//			std::cout << eliteTracker[eliteTracker.size()-2].at(i) << " ";
 		}
-		std::cout << std::endl;
+//		std::cout << std::endl;
 		
-		std::cout << "With a distance of: ";
+//		std::cout << "With a distance of: ";
 	
 			for(int j=0;j<numCities;j++)//Prints out shuffled vector
 			{	
@@ -374,14 +379,20 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 
 			}
 
-			std::cout << totalTwo;
+//			std::cout << totalTwo;
 
-			std::cout << std::endl <<std::endl;
+//			std::cout << std::endl <<std::endl;
 			
 
 	numGen++;
 	
 	}
 
+		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
+		duration<double> time_span = duration_cast<duration<double>>(t2-t1);
+
+		std::cout << "It took: " << time_span.count() << " seconds"  <<std::endl;
+
+		std::cout << "Percent of optimal that the GA produced:  " << (genMin/bruteForce)*100  << "%" << std::endl;
 }
