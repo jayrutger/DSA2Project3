@@ -295,39 +295,11 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 		
 		}
 	
-//		std::cout << std::endl;
-//		std::cout << std::endl;
-//		std::cout << std::endl;
-
-	for(int j=0;j<eliteTracker.size();j++)
-	{
-
-		for(int i=0;i<numCities;i++)
-		{
-//			std::cout << eliteTracker[j].at(i) << " ";
-		}
-//		std::cout << std::endl;
-	}
-
-
-//		std::cout << std::endl;
-//		std::cout << std::endl;
-//		std::cout << std::endl;
 		if(numGen == numGenerations-1)
 		{	
-			std::cout <<"The min distance of this generation is: " <<  genMin << std::endl; 
+			std::cout <<"The cost from the generational model is: " <<  genMin << std::endl; 
 
 		}
-
-//		std::cout << "The elites of this generation are: ";
-
-		for(int i=0;i<numCities;i++)
-		{
-//			std::cout << eliteTracker[eliteTracker.size()-1].at(i) << " ";
-		}
-//		std::cout << std::endl;
-
-//		std::cout << "With a distance of: ";
 
 		double totalOne = 0;
 			for(int j=0;j<numCities;j++)//Prints out shuffled vector
@@ -348,20 +320,9 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 			}
 
 
-//		std::cout << totalOne;
-		
-//		std::cout << std::endl;
-//		std::cout << "and: ";
 
 		double totalTwo=0;
 
-		for(int i=0;i<numCities;i++)
-		{
-//			std::cout << eliteTracker[eliteTracker.size()-2].at(i) << " ";
-		}
-//		std::cout << std::endl;
-		
-//		std::cout << "With a distance of: ";
 	
 			for(int j=0;j<numCities;j++)//Prints out shuffled vector
 			{	
@@ -377,12 +338,7 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 				}
 
 
-			}
-
-//			std::cout << totalTwo;
-
-//			std::cout << std::endl <<std::endl;
-			
+			}	
 
 	numGen++;
 	

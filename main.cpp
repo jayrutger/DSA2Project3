@@ -91,14 +91,9 @@ int main()
 
 	obj.MakeArrayFromFile();
 
-//	obj.PrintMatrix();
-
-
 	std::cout << "The number of cities ran is: " << numCities << std::endl<< std::endl;
 
 	obj.Permutate(numCities);	
-
-//	obj.GetDistance();	
 
 	std::cout << std::endl;
 
@@ -106,12 +101,6 @@ int main()
 
 
 	std::cout << std::endl << std::endl;
-
-
-//	std::cout << "The optimal cost from brute force is:  " << numCities << std::endl;
-
-
-//	std::cout << "The number of cities ran is: " << numCities << std::endl;
 
 
 	return 0;
