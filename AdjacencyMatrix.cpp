@@ -80,10 +80,7 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 	}
 
 	int m, k, p, q, i;
-//	printS();//set called S
 	
-///	permVect2.push_back(permVect);//To store normal int vector
-
 	double firstTotal=0;
 
 	for(int j=0;j<numElements;j++)
@@ -128,8 +125,6 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 			q--;
 		}
 
-///		permVect2.push_back(permVect);//Permutated vectors
-
 		for(int j=0;j<numElements;j++)
 		{
 
@@ -151,19 +146,15 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 		}
 
 
-//		printS();
 	}
 
-//		printS();	
 
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 
 		duration<double> time_span = duration_cast<duration<double>>(t2-t1);
 
-//		GetDistance();
-
-		std::cout << "The minimum distance is: " << minValue << std::endl;// WORKS ME THINKS
+		std::cout << "The optimal cost of brute force is: " << minValue << std::endl;// WORKS ME THINKS
 		
 		std::cout << "It took : " << time_span.count() << " seconds" << std::endl  <<std::endl;
 
@@ -190,6 +181,7 @@ void AdjacencyMatrix::printS()
 double AdjacencyMatrix::GetDistance()
 {	
 	double minValue=0;
+
 	for(int i=0;i<permVect2.size();i++)
 	{
 		double thisTotal = 0;
@@ -199,16 +191,12 @@ double AdjacencyMatrix::GetDistance()
 
 			if(j==numElements-1)
 			{
-				thisTotal += matrix[permVect2[i].at(j)-1][permVect2[i].at(0)-1];	
-		
-				//std::cout <<  matrix[permVect2[i].at(j)-1][permVect2[i].at(0)-1] << std::endl;	
+				thisTotal += matrix[permVect2[i].at(j)-1][permVect2[i].at(0)-1];		
 			}
 
 			else
 			{	
-				thisTotal += matrix[permVect2[i].at(j)-1][permVect2[i].at(j+1) - 1];
-	
-				//std::cout << matrix[permVect2[i].at(j)-1][permVect2[i].at(j+1) - 1] << std::endl;
+				thisTotal += matrix[permVect2[i].at(j)-1][permVect2[i].at(j+1) - 1];	
 			}
 		}
 
@@ -221,7 +209,6 @@ double AdjacencyMatrix::GetDistance()
 		{
 			minValue = thisTotal;
 		}
-//		std::cout << thisTotal;
 	}
 
 	std::cout << "The minimum distance is: " << minValue << std::endl;// WORKS ME THINKS
@@ -234,8 +221,6 @@ double AdjacencyMatrix::GetDistance()
 
 void AdjacencyMatrix::Generational(int numCities, int numTours, int numGenerations, int numPercentage)
 {
-
-//	auto rng = std::default_random_engine {};
 
 	double genMin = 0;
 
@@ -255,11 +240,6 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 
 		double minDistance=0;
 
-//		for(int i=0;i<numCities;i++)//Makes initial chronological list
-//		{
-//			genPermVect.push_back(i+1);
-//		}
-
 		generationVect.clear();
 	
 		if(!eliteTracker.empty())
@@ -269,20 +249,15 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 			generationVect.push_back(eliteTracker.at(1));
 		}
 
-	//	eliteTracker.clear();
 		std::srand ( unsigned (std::time(0)));
 		for (int i=0; i<numTours; i++)
 		{
 			double thisTotal=0;
- 	//		eliteTracker.clear();
 	
-			//std::shuffle(genPermVect.begin(),genPermVect.end(),rng);
 			std::random_shuffle (genPermVect.begin(), genPermVect.end());		
-//			std::srand ( unsigned (std::time(0)));
 			
 			for(int j=0;j<numCities;j++)//Prints out shuffled vector
 			{
-//				std::cout << genPermVect.at(j) << " ";
 	
 	
 				if(j==numCities-1)
@@ -297,9 +272,7 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 
 
 			}
-
-//			std::cout << std::endl;
-			
+	
 			generationVect.push_back(genPermVect);
 
 			if(i==0 && numGen ==0)
@@ -315,16 +288,10 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 				minDistance = thisTotal;
 				smallTracker++;
 				eliteTracker.push_back(genPermVect);
-			}
-
-
- //			eliteTracker.clear();
-	
+			}	
 		
 		}
 	
- //		eliteTracker.clear();
-
 		std::cout << std::endl;
 		std::cout << std::endl;
 		std::cout << std::endl;
@@ -413,8 +380,8 @@ void AdjacencyMatrix::Generational(int numCities, int numTours, int numGeneratio
 			
 
 	numGen++;
+	
 	}
 
-//		eliteTracker.clear();
 
 }

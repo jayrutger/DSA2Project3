@@ -92,13 +92,27 @@ int main()
 	obj.MakeArrayFromFile();
 
 //	obj.PrintMatrix();
-		
-	obj.Permutate(10);	
-
-//	obj.GetDistance();
 	
 
+	std::cout << "The number of cities ran is: " << numCities << std::endl;
+
+	obj.Permutate(10);	
+
+//	obj.GetDistance();	
+
+	std::cout << std::endl << std::endl;
+
 	obj.Generational(numCities, numTours, numGenerations, numPercent);
+
+
+	std::cout << std::endl << std::endl;
+
+
+//	std::cout << "The optimal cost from brute force is:  " << numCities << std::endl;
+
+
+//	std::cout << "The number of cities ran is: " << numCities << std::endl;
+
 
 	return 0;
 }
