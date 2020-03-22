@@ -20,12 +20,16 @@ class AdjacencyMatrix
 	public:
 	
 		std::vector <std::vector <int>> permVect2;
-		std::vector <int> permVect;
+		std::vector <int> permVect;	
+		std::vector <int> genPermVect;
+		std::vector <std::vector <int>> eliteTracker;
+		std::vector <std::vector <int>> generationVect;
 		void PrintMatrix();
 		void MakeArrayFromFile();
 		void printS();
 		void Permutate(int numElements);
 		double GetDistance();
+		void Generational(int numCities, int numTours, int numGenerations, int numPercentage);
 };
 
 #endif 

@@ -1,6 +1,10 @@
 #include "AdjacencyMatrix.hpp"
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <random>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std::chrono;
 
@@ -79,8 +83,6 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 //	printS();//set called S
 	
 ///	permVect2.push_back(permVect);//To store normal int vector
-
-//	thisTotal += matrix[permVect.at(j)-1][permVect2.at(0)-1];	
 
 	double firstTotal=0;
 
@@ -163,7 +165,7 @@ void AdjacencyMatrix::Permutate(int NUMELEMENTS)
 
 		std::cout << "The minimum distance is: " << minValue << std::endl;// WORKS ME THINKS
 		
-		std::cout << "It took : " << time_span.count() << " seconds" << std::endl;
+		std::cout << "It took : " << time_span.count() << " seconds" << std::endl  <<std::endl;
 
 }
 
@@ -228,3 +230,191 @@ double AdjacencyMatrix::GetDistance()
 
 
 
+
+
+void AdjacencyMatrix::Generational(int numCities, int numTours, int numGenerations, int numPercentage)
+{
+
+//	auto rng = std::default_random_engine {};
+
+	double genMin = 0;
+
+	int numGen=0;
+
+	for(int i=0;i<numCities;i++)//Makes initial chronological list
+	{
+		genPermVect.push_back(i+1);
+	}
+
+	for(int i=0; i<numGenerations; i++)
+	{
+
+		int smallTracker=0;
+	
+		int numStart=0;
+
+		double minDistance=0;
+
+//		for(int i=0;i<numCities;i++)//Makes initial chronological list
+//		{
+//			genPermVect.push_back(i+1);
+//		}
+
+		generationVect.clear();
+	
+		if(!eliteTracker.empty())
+		{
+
+			generationVect.push_back(eliteTracker.at(0));
+			generationVect.push_back(eliteTracker.at(1));
+		}
+
+	//	eliteTracker.clear();
+		std::srand ( unsigned (std::time(0)));
+		for (int i=0; i<numTours; i++)
+		{
+			double thisTotal=0;
+ 	//		eliteTracker.clear();
+	
+			//std::shuffle(genPermVect.begin(),genPermVect.end(),rng);
+			std::random_shuffle (genPermVect.begin(), genPermVect.end());		
+//			std::srand ( unsigned (std::time(0)));
+			
+			for(int j=0;j<numCities;j++)//Prints out shuffled vector
+			{
+//				std::cout << genPermVect.at(j) << " ";
+	
+	
+				if(j==numCities-1)
+				{
+					thisTotal += matrix[genPermVect.at(j)-1][genPermVect.at(0)-1];		
+				}
+
+				else
+				{	
+					thisTotal += matrix[genPermVect.at(j)-1][genPermVect.at(j+1) - 1];	
+				}
+
+
+			}
+
+//			std::cout << std::endl;
+			
+			generationVect.push_back(genPermVect);
+
+			if(i==0 && numGen ==0)
+			{
+				genMin = thisTotal;
+				minDistance = thisTotal;
+				smallTracker++;
+				eliteTracker.push_back(genPermVect);
+			}
+			if(thisTotal <= genMin)
+			{
+				genMin = thisTotal;
+				minDistance = thisTotal;
+				smallTracker++;
+				eliteTracker.push_back(genPermVect);
+			}
+
+
+ //			eliteTracker.clear();
+	
+		
+		}
+	
+ //		eliteTracker.clear();
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+	for(int j=0;j<eliteTracker.size();j++)
+	{
+
+		for(int i=0;i<numCities;i++)
+		{
+			std::cout << eliteTracker[j].at(i) << " ";
+		}
+		std::cout << std::endl;
+	}
+
+
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+
+		std::cout <<"The min distance of this generation is: " <<  genMin << std::endl; 
+
+
+		std::cout << "The elites of this generation are: ";
+
+		for(int i=0;i<numCities;i++)
+		{
+			std::cout << eliteTracker[eliteTracker.size()-1].at(i) << " ";
+		}
+		std::cout << std::endl;
+
+		std::cout << "With a distance of: ";
+
+		double totalOne = 0;
+			for(int j=0;j<numCities;j++)//Prints out shuffled vector
+			{
+	
+	
+				if(j==numCities-1)
+				{
+					totalOne += matrix[eliteTracker[eliteTracker.size()-1].at(j)-1][eliteTracker[eliteTracker.size()-1].at(0)-1];		
+				}
+
+				else
+				{	
+					totalOne += matrix[eliteTracker[eliteTracker.size()-1].at(j)-1][eliteTracker[eliteTracker.size()-1].at(j+1) - 1];	
+				}
+
+
+			}
+
+
+		std::cout << totalOne;
+		
+		std::cout << std::endl;
+		std::cout << "and: ";
+
+		double totalTwo=0;
+
+		for(int i=0;i<numCities;i++)
+		{
+			std::cout << eliteTracker[eliteTracker.size()-2].at(i) << " ";
+		}
+		std::cout << std::endl;
+		
+		std::cout << "With a distance of: ";
+	
+			for(int j=0;j<numCities;j++)//Prints out shuffled vector
+			{	
+	
+				if(j==numCities-1)
+				{
+					totalTwo += matrix[eliteTracker[eliteTracker.size()-2].at(j)-1][eliteTracker[eliteTracker.size()-2].at(0)-1];		
+				}
+
+				else
+				{	
+					totalTwo += matrix[eliteTracker[eliteTracker.size()-2].at(j)-1][eliteTracker[eliteTracker.size()-2].at(j+1) - 1];	
+				}
+
+
+			}
+
+			std::cout << totalTwo;
+
+			std::cout << std::endl <<std::endl;
+			
+
+	numGen++;
+	}
+
+//		eliteTracker.clear();
+
+}
