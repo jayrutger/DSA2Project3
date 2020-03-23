@@ -6,6 +6,23 @@
 #include <ctime>
 #include <cstdlib>
 
+/*********************************************************************************
+ Student Name: James Rutger
+ File Name: AdjacencyMatrix.cpp
+ Assignment: Project 3 - Brute Force and Generational
+
+ Data Structures and Algorithms 2
+ Dr. John Coffey
+
+ Class Description:
+
+ This class has the functions for the brute force method and the generational method
+ for the traveling salesman problem. The brute force takes in the number of cities, 
+ and outputs the minimum distance with the time it took to calculate it.
+ The generational method takes in the number of cities, tours, generations, and
+ mutation percentage per generation, and finally outputs the min distance by this
+ method and the time it took to calculate it. 
+***********************************************************************************/
 using namespace std::chrono;
 
 void AdjacencyMatrix::MakeArrayFromFile()

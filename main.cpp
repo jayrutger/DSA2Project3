@@ -1,5 +1,23 @@
 #include "AdjacencyMatrix.hpp"
 
+/*********************************************************************************
+ Student Name: James Rutger
+ File Name: Main.cpp
+ Assignment: Project 3 - Brute Force and Generational
+
+ Data Structures and Algorithms 2
+ Dr. John Coffey
+
+ Class Description:
+
+ Main reads from "distances.txt", stores the distances into a 2D adjacency matrix.
+ It then asks the user for the required inputs, and calls the functions in the
+ AdjacencyMatrix class to do the bruteforce permutations and outputs its results,
+ then calls the generational function and outputs its results too.
+
+***********************************************************************************/
+
+
 bool valid = false;
 
 int numCities, numTours, numGenerations, numPercent;
